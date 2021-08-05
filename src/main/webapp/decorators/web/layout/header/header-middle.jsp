@@ -19,8 +19,8 @@
                                 <i class="fa fa-clock-o"></i>
                             </div>
                             <div class="shipping-content">
-                                <h5>Working time</h5>
-                                <span>Mon- Sun: 8.00 - 18.00</span>
+                                <h5>Thời gian làm việc</h5>
+                                <span>Cả tuần: 8.00 - 18.00</span>
                             </div>
                         </div> <!-- end single shipping -->
                         <div class="single-block-shipping">
@@ -28,8 +28,8 @@
                                 <i class="fa fa-truck"></i>
                             </div>
                             <div class="shipping-content">
-                                <h5>free shipping</h5>
-                                <span>On order over $199</span>
+                                <h5>Miễn phí giao hàng</h5>
+                                <span>Đơn hàng trên 2 triệu</span>
                             </div>
                         </div> <!-- end single shipping -->
                         <div class="single-block-shipping">
@@ -37,16 +37,25 @@
                                 <i class="fa fa-money"></i>
                             </div>
                             <div class="shipping-content">
-                                <h5>money back 100%</h5>
-                                <span>Within 30 Days after delivery</span>
+                                <h5>Hoàn tiền 100%</h5>
+                                <span>Trong 30 ngày nếu sản phẩm lỗi</span>
                             </div>
                         </div> <!-- end single shipping -->
                     </div>
                     <div class="header-middle-block">
                         <div class="header-middle-searchbox">
-                            <input type="text" placeholder="Search...">
-                            <button class="search-btn"><i class="fa fa-search"></i></button>
+                            <input id="search-name-product" type="text" placeholder="Tìm kiếm theo tên sản phẩm...">
+                            <button onclick="clickSearch()" class="search-btn"><i class="fa fa-search"></i></button>
                         </div>
+                        <script>
+                            function clickSearch() {
+                                console.log('a')
+                                let name = document.getElementById('search-name-product').value
+                                if (name !== null && name.trim() !== '') {
+                                    window.location = '${pageContext.request.contextPath}/product?name=' + name
+                                }
+                            }
+                        </script>
                         <div class="header-mini-cart">
                             <div class="mini-cart-btn">
                                 <i class="fa fa-shopping-cart"></i>
@@ -60,7 +69,6 @@
                                 </span>
                             </div>
                             <div class="cart-total-price">
-                                <span>total</span>
                                 <c:set var="total" value="${0}"/>
                                 <c:forEach items="${lstCart}" var="cart">
                                     <c:set var="total"

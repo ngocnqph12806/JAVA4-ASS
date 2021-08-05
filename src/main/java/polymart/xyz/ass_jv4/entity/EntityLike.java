@@ -6,6 +6,12 @@ import javax.persistence.*;
 @Table(name = "likes", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"phonenumber", "idproduct"})
 })
+@NamedQueries({
+        @NamedQuery(name = "findAllLike",
+                query = "SELECT o FROM EntityLike o"),
+        @NamedQuery(name = "findByVisitAndProductLike",
+                query = "SELECT o FROM EntityLike o WHERE o.entityVisit = ?1 AND o.entityProduct = ?2")
+})
 public class EntityLike {
 
     @Id

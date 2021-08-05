@@ -4,7 +4,7 @@
     <nav id="mobile-menu">
         <ul>
             <li class="text-danger"><a href="#">
-<%--                <i class="fa fa-home"></i>--%>
+                <%--                <i class="fa fa-home"></i>--%>
                 Sản phẩm mới xem
                 <i class="fa fa-angle-down"></i></a>
                 <ul class="dropdown">

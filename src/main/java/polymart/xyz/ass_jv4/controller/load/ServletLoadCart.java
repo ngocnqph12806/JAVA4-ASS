@@ -39,7 +39,7 @@ public class ServletLoadCart extends HttpServlet {
                     }
                     if (newCart.charAt(0) == 'c') {
                         cart = newCart.substring(newCart.indexOf("c") + 1);
-                    }else{
+                    } else {
                         cart = newCart;
                     }
                     CookieUtils.getCookieUtils().setCookieUtils("cart", cart, response);

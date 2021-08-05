@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="meta description">
 <!-- Favicon -->
-<link rel="shortcut icon" href="<c:url value="/assets/website/img/favicon.ico"/>" type="image/x-icon" />
+<link rel="shortcut icon" href="<c:url value="/assets/website/img/favicon.ico"/>" type="image/x-icon"/>
 <!-- Bootstrap CSS -->
 <link href="<c:url value="/assets/website/css/bootstrap.min.css"/>" rel="stylesheet">
 <!-- Font-Awesome CSS -->

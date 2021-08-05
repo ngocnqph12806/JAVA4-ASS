@@ -36,17 +36,13 @@ public class ServletHomeWebsite extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        request.setAttribute("lstNewImportProduct", _iServiceProduct.findNewImportProduct());
+        request.setAttribute("lstShowBanner", _iServiceBanner.findShowBanner());
+        request.setAttribute("lstMostViewProduct", _iServiceProduct.findMostViewedProduct());
+        request.setAttribute("lstHotSaleProduct", _iServiceProduct.findHotSaleProduct());
+        request.setAttribute("lstNewProduct", _iServiceProduct.findNewProduct());
+        request.setAttribute("lstHotProduct", _iServiceProduct.findHotProduct());
 
-//        request.setAttribute("lstNewImportProduct", _iServiceProduct.findNewImportProduct());
-//        request.setAttribute("lstHotProduct", _iServiceProduct.findHotProduct());
-//        request.setAttribute("product1", _iServiceProduct.findNewProduct().get(0));
-//        request.setAttribute("lstCategory", _iServiceCategory.findAll());
-//        request.setAttribute("lstBrand", _iServiceBrand.findAll());
-//        request.setAttribute("lstTopBuyProduct", _iServiceProduct.findByTopBuy());
-//        request.setAttribute("lstNewProduct", _iServiceProduct.findNewProduct());
-//        request.setAttribute("lstHotSaleProduct", _iServiceProduct.findHotSaleProduct());
-//        request.setAttribute("lstMostViewProduct", _iServiceProduct.findMostViewedProduct());
-//        request.setAttribute("lstShowBanner", _iServiceBanner.findShowBanner());
         request.getRequestDispatcher("/views/website/home.jsp").forward(request, response);
     }
 

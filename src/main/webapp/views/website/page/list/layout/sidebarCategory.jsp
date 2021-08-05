@@ -13,7 +13,9 @@
         <ul>
             <li class="title"><i class="fa fa-bars"></i> categories</li>
             <c:forEach items="${lstCategory}" var="category">
-                <li><a href="<c:url value="/category?id=${category.id}"/>">${category.name}</a><span>(${fn:length(category.lstEntityProducts)})</span></li>
+                <li>
+                    <a href="<c:url value="/category?id=${category.id}"/>">${category.name}</a><span>(${fn:length(category.lstEntityProducts)})</span>
+                </li>
             </c:forEach>
         </ul>
     </div>

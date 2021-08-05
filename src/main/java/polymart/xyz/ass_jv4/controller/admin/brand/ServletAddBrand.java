@@ -42,7 +42,7 @@ public class ServletAddBrand extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/admin/brand/quan-ly-thuong-hieu");
                 return;
             }
-        } catch ( InvocationTargetException | IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
         request.setAttribute("addBrandError", "Thêm thương hiệu thất bại");

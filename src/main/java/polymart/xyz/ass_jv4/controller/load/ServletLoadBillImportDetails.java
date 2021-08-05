@@ -31,7 +31,7 @@ public class ServletLoadBillImportDetails extends HttpServlet {
         String id = request.getParameter("id");
         try {
             if (id != null && Integer.parseInt(id) > 0) {
-                EntityBillImport entityBillImport =  _iServiceBillImport.findById(id);
+                EntityBillImport entityBillImport = _iServiceBillImport.findById(id);
                 if (entityBillImport != null) {
                     request.setAttribute("billimport", entityBillImport);
                     request.getRequestDispatcher("/views/admin/page/billimport/layout/modalBillImportDetails.jsp").forward(request, response);

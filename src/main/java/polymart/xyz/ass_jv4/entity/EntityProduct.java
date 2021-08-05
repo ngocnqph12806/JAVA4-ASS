@@ -53,7 +53,7 @@ import java.util.List;
                 query = "SELECT DISTINCT product FROM EntityProduct product, EntityLike lai " +
                         "WHERE product.removed = false AND product.status = true AND product.id = lai.entityProduct.id " +
                         "AND product.view > 0 AND product.persenSale > 0 " +
-                        "GROUP BY product " +
+                        "GROUP BY product HAVING COUNT(lai.entityProduct.id) > 0 " +
                         "ORDER BY product.view DESC, product.persenSale DESC, COUNT(lai.entityProduct.id) DESC "
         ),
         @NamedQuery(name = "findByNewImportProduct",

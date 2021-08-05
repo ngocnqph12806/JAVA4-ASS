@@ -53,10 +53,10 @@ public class ServletEditBrand extends HttpServlet {
             if (_iServiceBrand.updateBrand(entityBrand)) {
                 response.sendRedirect(request.getContextPath() + "/admin/brand/quan-ly-thuong-hieu");
                 return;
-            }else{
+            } else {
                 request.setAttribute("editBrandError", "Chỉnh sửa thông tin thương hiệu thất bại");
             }
-        } catch ( InvocationTargetException | IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException e) {
             request.setAttribute("editBrandError", "Lỗi dữ liệu");
             e.printStackTrace();
         }

@@ -41,8 +41,10 @@ Sidebar start
                     <i class="icon-arrows-circle-plus menu-icon"></i><span class="nav-text">Quản lý hoá đơn</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="<c:url value="/admin/payments/quan-ly-hoa-don-nhap-hang"/>">Quản lý hoá đơn nhập</a></li>
-                    <li><a href="<c:url value="/admin/payments/quan-ly-hoa-don-thanh-toan"/>">Quản lý hoá đơn thanh toán</a></li>
+                    <li><a href="<c:url value="/admin/payments/quan-ly-hoa-don-nhap-hang"/>">Quản lý hoá đơn nhập</a>
+                    </li>
+                    <li><a href="<c:url value="/admin/payments/quan-ly-hoa-don-thanh-toan"/>">Quản lý hoá đơn thanh
+                        toán</a></li>
                 </ul>
             </li>
         </ul>

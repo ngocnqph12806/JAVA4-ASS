@@ -45,7 +45,7 @@ public class ServletLoadCategory extends HttpServlet {
                         _iServiceCategory.updateCategory(modelCategory);
                     }
                 }
-            } catch ( InvocationTargetException | IllegalAccessException e) {
+            } catch (InvocationTargetException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }

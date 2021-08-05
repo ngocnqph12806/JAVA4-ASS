@@ -136,4 +136,22 @@ public class EntityVoucher {
     public void setLstEntityPayments(List<EntityPayment> lstEntityPayments) {
         this.lstEntityPayments = lstEntityPayments;
     }
+
+    @Override
+    public String toString() {
+        return "EntityVoucher{" +
+                "id='" + id + '\'' +
+                ", event='" + event + '\'' +
+                ", entityStaff=" + entityStaff +
+                ", dateCreated=" + dateCreated +
+                ", priceSale=" + priceSale +
+                ", quantity=" + quantity +
+                ", reQuantity=" + reQuantity +
+                ", dateStart=" + dateStart +
+                ", dateEnd=" + dateEnd +
+                ", description='" + description + '\'' +
+                ", removed=" + removed +
+                ", lstEntityPayments=" + lstEntityPayments +
+                '}';
+    }
 }

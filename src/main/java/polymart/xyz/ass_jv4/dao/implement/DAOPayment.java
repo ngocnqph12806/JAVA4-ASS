@@ -27,7 +27,7 @@ public class DAOPayment extends AbstractDAO<EntityPayment> implements IDAOPaymen
         try {
             query = query(query, phoneNumberVisit, Long.parseLong(paymentAmount));
             if (query.getResultList().size() > 0) {
-                return query.getSingleResult();
+                return query.getResultList().get(0);
             }
         } catch (Exception e) {
             e.printStackTrace();

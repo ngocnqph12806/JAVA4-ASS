@@ -23,6 +23,13 @@ public class FormatUtils {
         return null;
     }
 
+    public boolean checkDate(Date date1, Date date2) {
+        String x = new SimpleDateFormat("yyyyMMdd").format(date1);
+        String y = new SimpleDateFormat("yyyyMMdd").format(date2);
+        int z = Integer.parseInt(x) - Integer.parseInt(y);
+        return z >= 0;
+    }
+
     public static FormatUtils getFormatUtils() {
         if (formatUtils == null) {
             formatUtils = new FormatUtils();

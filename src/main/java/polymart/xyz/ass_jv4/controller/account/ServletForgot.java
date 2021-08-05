@@ -36,7 +36,7 @@ public class ServletForgot extends HttpServlet {
         String errorForgotpassword = null;
         if (url.contains("/reset-password")) {
             String newPassword = request.getParameter("newPassword");
-            EntityStaff entityStaff = SessionUtils.getSessionUtils().getSessionStaff("userforgot", request);
+            EntityStaff entityStaff = (EntityStaff) SessionUtils.getSessionUtils().getSessionModel("userforgot", new EntityStaff(), request);
             if (entityStaff != null) {
                 entityStaff.setPassword(newPassword);
                 IServiceStaff iServiceStaff = new ServiceStaff();
@@ -61,11 +61,11 @@ public class ServletForgot extends HttpServlet {
                     String body = "<a href=\"http://localhost:8081/ASS_JV4_war_exploded/account?forgot-password=" + entityStaff.getId() + "\">Click here</a>";
                     try {
                         getMailUtils().sendMail(entityStaff.getEmail(), title, body);
-                        response.sendRedirect(request.getContextPath()+"/account?send-reset-password=true");
+                        response.sendRedirect(request.getContextPath() + "/account?send-reset-password=true");
                         return;
                     } catch (MessagingException e) {
                         e.printStackTrace();
-                        response.sendRedirect(request.getContextPath()+"/account?send-reset-password=false");
+                        response.sendRedirect(request.getContextPath() + "/account?send-reset-password=false");
                         return;
                     }
                 } else {

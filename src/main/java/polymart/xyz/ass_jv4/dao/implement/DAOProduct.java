@@ -42,6 +42,7 @@ public class DAOProduct extends AbstractDAO<EntityProduct> implements IDAOProduc
     @Override
     public List<EntityProduct> findByTopBuy() {
         TypedQuery<EntityProduct> query = em.createNamedQuery("findByTopBuyProduct", EntityProduct.class);
+        query.setMaxResults(12);
         return query.getResultList();
     }
 
@@ -56,6 +57,7 @@ public class DAOProduct extends AbstractDAO<EntityProduct> implements IDAOProduc
     @Override
     public List<EntityProduct> findHotProduct() {
         TypedQuery<EntityProduct> query = em.createNamedQuery("findByHotProduct", EntityProduct.class);
+        query.setMaxResults(12);
         return query.getResultList();
     }
 

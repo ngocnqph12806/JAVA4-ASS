@@ -4,7 +4,9 @@ import polymart.xyz.ass_jv4.dao.IDAOVoucher;
 import polymart.xyz.ass_jv4.dao.implement.DAOVoucher;
 import polymart.xyz.ass_jv4.entity.EntityVoucher;
 import polymart.xyz.ass_jv4.service.IServiceVoucher;
+import polymart.xyz.ass_jv4.utils.FormatUtils;
 
+import java.util.Date;
 import java.util.List;
 
 public class ServiceVoucher implements IServiceVoucher {
@@ -18,6 +20,16 @@ public class ServiceVoucher implements IServiceVoucher {
 
     @Override
     public EntityVoucher findById(String id) {
+        EntityVoucher result = _idaoVoucher.findById(id);
+        if (result != null && FormatUtils.getFormatUtils().checkDate(new Date(), result.getDateStart())
+                && FormatUtils.getFormatUtils().checkDate(result.getDateEnd(), new Date())) {
+            return result;
+        }
+        return null;
+    }
+
+    @Override
+    public EntityVoucher findByIdEdit(String id) {
         return _idaoVoucher.findById(id);
     }
 

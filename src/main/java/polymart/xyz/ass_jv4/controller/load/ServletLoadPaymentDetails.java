@@ -28,7 +28,7 @@ public class ServletLoadPaymentDetails extends HttpServlet {
         String id = request.getParameter("id");
         try {
             if (id != null && Integer.parseInt(id) > 0) {
-                EntityPayment entityPayment =  _iServicePayment.findById(id);
+                EntityPayment entityPayment = _iServicePayment.findById(id);
                 if (entityPayment != null) {
                     request.setAttribute("payment", entityPayment);
                     request.getRequestDispatcher("/views/admin/page/payment/layout/modalPaymentDetails.jsp").forward(request, response);
@@ -37,7 +37,7 @@ public class ServletLoadPaymentDetails extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return;
     }
 
     @Override

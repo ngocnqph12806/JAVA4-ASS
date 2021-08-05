@@ -19,21 +19,25 @@
                 <div class="header-top-right float-md-right float-none">
                     <nav>
                         <ul>
-                            <li>
-                                <a href="<c:url value="/signin"/>">Login</a>
-                            </li>
-                            <li>
-                                <a href="<c:url value="/signup"/>">Register</a>
-                            </li>
-                            <li>
-                                <a href="#">my wishlist</a>
-                            </li>
-                            <li>
-                                <a href="#">my cart</a>
-                            </li>
-                            <li>
-                                <a href="#">checkout</a>
-                            </li>
+                            <c:if test="${empty VISIT}">
+                                <li>
+                                    <a href="#click-login" data-toggle="modal">Đăng nhập</a>
+                                </li>
+                            </c:if>
+                            <c:if test="${not empty VISIT}">
+                                <li>
+                                    <a href="<c:url value="/logout"/>">Đăng xuất</a>
+                                </li>
+                                <li>
+                                    <a href="<c:url value="/payment-visit"/>">Hoá đơn mua hàng</a>
+                                </li>
+                                <li>
+                                    <a href="<c:url value="/cart"/>">Giỏ hàng</a>
+                                </li>
+                                <li>
+                                    <a href="<c:url value="/checkout"/>">Thanh toán</a>
+                                </li>
+                            </c:if>
                         </ul>
                     </nav>
                 </div>

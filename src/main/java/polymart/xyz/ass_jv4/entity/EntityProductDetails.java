@@ -9,8 +9,8 @@ import java.util.List;
 })
 @NamedQueries({
         @NamedQuery(name = "findByAll",
-        query = "SELECT o FROM EntityProductDetails o WHERE o.entityProduct = ?1 " +
-                "AND o.entityAttribute = ?2 AND o.price = ?3"),
+                query = "SELECT o FROM EntityProductDetails o WHERE o.entityProduct = ?1 " +
+                        "AND o.entityAttribute = ?2 AND o.price = ?3"),
         @NamedQuery(name = "findAll",
                 query = "SELECT o FROM EntityProductDetails o")
 })

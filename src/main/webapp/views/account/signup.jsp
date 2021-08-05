@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="password" id="repassword" class="form-control" name="repassword"
-                                           placeholder="Xác nhận mật khẩu" />
+                                           placeholder="Xác nhận mật khẩu"/>
                                 </div>
                                 <div class="form-group">
                                     <input type="file" id="avatar" class="form-control" name="avatar"/>

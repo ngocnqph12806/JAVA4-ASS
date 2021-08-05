@@ -72,8 +72,8 @@
 </div>
 
 <script>
-    $('a').click(function(e){
-        if(e.currentTarget.id === 'showDetails'){
+    $('a').click(function (e) {
+        if (e.currentTarget.id === 'showDetails') {
             e.preventDefault();
             $.ajax({
                 url: e.target.href,

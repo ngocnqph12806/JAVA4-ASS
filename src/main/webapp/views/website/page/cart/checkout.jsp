@@ -39,7 +39,9 @@
                 <div class="checkoutaccordion" id="checkOutAccordion">
                     <div class="card">
                         <c:if test="${visit==null}">
-                            <h3>Đã có tài khoản? <span data-toggle="collapse" data-target="#logInaccordion">Click để đăng nhập</span>
+                            <%--                            <h3>Đã có tài khoản? <span data-toggle="collapse" data-target="#logInaccordion">Click để đăng nhập</span>--%>
+                            <h3>Đã có tài khoản? <span data-target="#click-login"
+                                                       data-toggle="modal">Click để đăng nhập</span>
                             </h3>
 
                             <div id="logInaccordion" class="collapse" data-parent="#checkOutAccordion">
@@ -127,8 +129,8 @@
                         <h2>Chi tiết hoá đơn thanh toán</h2>
                         <div class="billing-form-wrap">
                             <div class="single-input-item">
-                                <label for="f_name" class="required">Họ và tên</label>
-                                <input type="text" name="fullName" id="f_name" placeholder="Họ và tên"
+                                <label for="name" class="required">Họ và tên</label>
+                                <input type="text" name="fullName" id="name" placeholder="Họ và tên"
                                        value="${visit.fullName}" required/>
                             </div>
 
@@ -145,8 +147,8 @@
                             </div>
 
                             <div class="single-input-item">
-                                <label for="street-address" class="required pt-20">Địa chỉ</label>
-                                <input type="text" name="address" id="street-address" placeholder="Địa chỉ"
+                                <label for="address" class="required pt-20">Địa chỉ</label>
+                                <input type="text" name="address" id="address" placeholder="Địa chỉ"
                                        value="${visit.address}" required/>
                             </div>
 
@@ -160,8 +162,8 @@
                                 </div>
                                 <div class="account-create single-form-row">
                                     <div class="single-input-item">
-                                        <label for="pwd" class="required">Mật khẩu tài khoản</label>
-                                        <input type="password" name="password" id="pwd"
+                                        <label for="password" class="required">Mật khẩu tài khoản</label>
+                                        <input type="password" name="password" id="password"
                                                placeholder="Nhập mật khẩu tài khoản" required/>
                                     </div>
                                 </div>
@@ -255,6 +257,11 @@
                                                    class="custom-control-input"/>
                                             <label class="custom-control-label" for="qrcode">Quét mã QRCode</label>
                                         </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="vnpay" name="payments" value="vnpay"
+                                                   class="custom-control-input"/>
+                                            <label class="custom-control-label" for="vnpay">Thanh toán trực tuyến</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <c:if test="${not empty lstCart}">
@@ -274,8 +281,25 @@
 <!-- checkout main wrapper end -->
 
 <script>
-
     $('#idBtnOrder').click(function () {
-        document.getElementById('idformorder').submit();
+        let name = document.getElementById('name').value
+        let phoneNumber = document.getElementById('phone').value
+        let email = document.getElementById('email').value
+        let address = document.getElementById('address').value
+        let password = document.getElementById('password').value
+        if (checkLastName(name) && checkPhoneNumber(phoneNumber) && checkEmail(email)
+            && checkAddress(address)) {
+            if (password !== null && password !== '') {
+                if (checkPassword(password)) {
+                    // sendMethod();
+                    document.getElementById('idformorder').submit();
+                } else {
+                    return;
+                }
+            } else {
+                // sendMethod();
+                document.getElementById('idformorder').submit();
+            }
+        }
     })
 </script>

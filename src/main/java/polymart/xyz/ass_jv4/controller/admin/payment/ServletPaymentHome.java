@@ -41,18 +41,32 @@ public class ServletPaymentHome extends HttpServlet {
                 entityPayment = _iServicePayment.findById(id);
                 if (entityPayment != null) {
                     if (action.equals("true")) {
-                        entityPayment.setStatusBilling(true);
-                        if (_iServicePayment.updatePayment(entityPayment)) {
-                            EntityProductDetails entityProductDetails;
-                            for (EntityPaymentDetails x : entityPayment.getLstEntityPaymentDetails()) {
-                                int quantity = x.getQuantity();
-                                entityProductDetails = x.getEntityProductDetails();
-                                entityProductDetails.setQuantity(entityProductDetails.getQuantity() - quantity);
-                                _iServiceProductDetails.updateProductDetails(entityProductDetails);
+                        EntityProductDetails entityProductDetails;
+                        boolean flag = true;
+                        for (EntityPaymentDetails x : entityPayment.getLstEntityPaymentDetails()) {
+                            int quantity = x.getQuantity();
+                            if (x.getEntityProductDetails().getQuantity() < quantity) {
+                                flag = false;
+                                break;
                             }
                         }
-                        response.sendRedirect(request.getContextPath() + "/admin/payments");
-                        return;
+                        if (flag) {
+                            entityPayment.setStatusBilling(true);
+                            if (_iServicePayment.updatePayment(entityPayment)) {
+                                for (EntityPaymentDetails x : entityPayment.getLstEntityPaymentDetails()) {
+                                    int quantity = x.getQuantity();
+                                    entityProductDetails = x.getEntityProductDetails();
+                                    entityProductDetails.setQuantity(entityProductDetails.getQuantity() - quantity);
+                                    _iServiceProductDetails.updateProductDetails(entityProductDetails);
+                                }
+                                response.sendRedirect(request.getContextPath() + "/admin/payments");
+                                return;
+                            }else{
+                                request.setAttribute("errorPayment", "Cập nhật trạng thái thất bại!");
+                            }
+                        } else {
+                            request.setAttribute("errorPayment", "Số lượng trong kho không đủ!");
+                        }
                     }
                 }
             }

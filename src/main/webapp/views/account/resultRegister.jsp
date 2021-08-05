@@ -15,7 +15,7 @@
         }, function (kq) {
             if (kq) {
                 window.location = '${pageContext.request.contextPath}/${link}'
-            }else{
+            } else {
                 window.location = '${pageContext.request.contextPath}/'
             }
         })

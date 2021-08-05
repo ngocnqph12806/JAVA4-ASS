@@ -112,7 +112,7 @@ public class ServletAddProduct extends HttpServlet {
                     }
                 }
                 modelProduct.setLstEntityProductDetails(lstEntityProductDetails);
-                EntityStaff modelStaff = SessionUtils.getSessionUtils().getSessionStaff("user", request);
+                EntityStaff modelStaff = (EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request);
                 modelProduct.setEntityStaff(modelStaff);
                 modelProduct.setStatus(true);
                 if (_iServiceProduct.newProduct(modelProduct)) {

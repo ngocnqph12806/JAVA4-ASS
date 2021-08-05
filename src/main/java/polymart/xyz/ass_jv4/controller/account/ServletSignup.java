@@ -51,19 +51,19 @@ public class ServletSignup extends HttpServlet {
                     && signup.getEmail() != null) {
                 if (signup.getPassword().length() >= 8
                         && signup.getPassword().length() <= 50) {
-                        signup.setAvatar(getBeanModel().setFileModel(request, "avatar", getPathFile().avatar));
-                        message = iServiceSingup.newAccount(signup);
-                        if (message.equals(ContaiUtils.REGISTER_TRUE)) {
-                            response.sendRedirect(request.getContextPath() + "/account?result=signup-successfully");
-                            return;
-                        }
+                    signup.setAvatar(getBeanModel().setFileModel(request, "avatar", getPathFile().avatar));
+                    message = iServiceSingup.newAccount(signup);
+                    if (message.equals(ContaiUtils.REGISTER_TRUE)) {
+                        response.sendRedirect(request.getContextPath() + "/account?result=signup-successfully");
+                        return;
+                    }
                 } else {
                     message = ContaiUtils.REGISTER_PASSWORD_LENGTH_FALSE;
                 }
             } else {
                 message = ContaiUtils.REGISTER_EMAIL_FALSE;
             }
-        } catch ( InvocationTargetException | IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException e) {
             message = ContaiUtils.ERROR_DATA;
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package polymart.xyz.ass_jv4.controller.admin.staff;
 
+import polymart.xyz.ass_jv4.entity.EntityStaff;
 import polymart.xyz.ass_jv4.service.IServiceStaff;
 import polymart.xyz.ass_jv4.service.implement.ServiceStaff;
 import polymart.xyz.ass_jv4.utils.SessionUtils;
@@ -36,7 +37,7 @@ public class ServletChangePassword extends HttpServlet {
 
         if (oldPassword != null && newPassword != null && rePassword != null) {
             if (newPassword.equals(rePassword)) {
-                if (_iServiceStaff.changePassword(SessionUtils.getSessionUtils().getSessionStaff("user", request).getEmail()
+                if (_iServiceStaff.changePassword(((EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request)).getEmail()
                         , oldPassword, newPassword)) {
                     response.sendRedirect(request.getContextPath() + "/account?changepassword=true");
                     return;

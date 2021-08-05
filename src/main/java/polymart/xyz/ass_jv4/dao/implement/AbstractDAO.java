@@ -24,10 +24,9 @@ public class AbstractDAO<T> implements GenericDAO<T> {
                 em.persist(entity);
             } else if (sql.equals(ContaiUtils.UPDATE)) {
                 em.merge(entity);
+            } else if (sql.equals(ContaiUtils.DELETE)) {
+                em.remove(entity);
             }
-//            else if (sql.equals(ContaiUtils.DELETE)) {
-//                em.remove(entity);
-//            }
             transaction.commit();
             return true;
         } catch (Exception e) {

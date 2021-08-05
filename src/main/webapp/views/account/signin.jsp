@@ -34,7 +34,7 @@
                                                                                      class="text-primary">Sign Up</a>
                                 now</p>
                             <p class="mt-5 login-form__footer">
-                                <a href="<c:url value="/forgot-password"/>"class="text-primary">Forgot password</a>
+                                <a href="<c:url value="/forgot-password"/>" class="text-primary">Forgot password</a>
                             </p>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ Scripts validate
         let password = document.getElementById('password').value;
         if (!checkEmail(email) || !checkPassword(password)) {
             event.preventDefault();
-        }else{
+        } else {
             $("#idformlogin").submit()
         }
     });

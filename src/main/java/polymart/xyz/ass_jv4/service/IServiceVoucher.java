@@ -10,6 +10,8 @@ public interface IServiceVoucher {
 
     EntityVoucher findById(String id);
 
+    EntityVoucher findByIdEdit(String id);
+
     boolean newVoucher(EntityVoucher entityVoucher);
 
     boolean updateVoucher(EntityVoucher entityVoucher);

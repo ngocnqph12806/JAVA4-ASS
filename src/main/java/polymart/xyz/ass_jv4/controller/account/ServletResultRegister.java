@@ -36,11 +36,13 @@ public class ServletResultRegister extends HttpServlet {
                     request.setAttribute("message", "Bạn đã áp dụng voucher");
                     request.setAttribute("link", "cart");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 } else {
                     request.setAttribute("title", "Voucher");
                     request.setAttribute("message", "Voucher không tồn tại!");
                     request.setAttribute("link", "cart");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 }
             } else if (applyCheckoutVoucher != null) {
                 if (applyCheckoutVoucher.equals("true")) {
@@ -48,11 +50,13 @@ public class ServletResultRegister extends HttpServlet {
                     request.setAttribute("message", "Bạn đã áp dụng voucher");
                     request.setAttribute("link", "checkout");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 } else {
                     request.setAttribute("title", "Voucher");
                     request.setAttribute("message", "Voucher không tồn tại!");
                     request.setAttribute("link", "checkout");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 }
             }
         } else if (url.contains("/account")) {
@@ -68,11 +72,13 @@ public class ServletResultRegister extends HttpServlet {
                     request.setAttribute("message", "Bạn sẽ được điều hướng tới trang quản lý");
                     request.setAttribute("link", "admin");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 } else if (result.equals("signup-successfully")) {
                     request.setAttribute("title", ContaiUtils.REGISTER_TRUE);
                     request.setAttribute("message", "Vui lòng kiểu tra email");
                     request.setAttribute("link", "signin");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 }
             } else if (active != null) {
                 if (_iServiceStaff.activeAccount(active)) {
@@ -83,21 +89,24 @@ public class ServletResultRegister extends HttpServlet {
                     request.setAttribute("link", "signin");
                 }
                 request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                return;
             } else if (changepassword != null) {
                 if (changepassword.equals("true")) {
                     request.setAttribute("title", "Đổi mật khẩu thành công");
                     request.setAttribute("link", "admin");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 } else if (changepassword.equals("false")) {
                     request.setAttribute("title", "Đổi mật khẩu thất bại");
                     request.setAttribute("message", "Mật khẩu không chính xác");
                     request.setAttribute("link", "admin");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 }
             } else if (forgotPassword != null) {
                 EntityStaff entityStaff = _iServiceStaff.findById(forgotPassword);
                 if (entityStaff != null) {
-                    SessionUtils.getSessionUtils().saveSessionStaff("userforgot", entityStaff, request);
+                    SessionUtils.getSessionUtils().saveSessionModel("userforgot", entityStaff, request);
                     response.sendRedirect(request.getContextPath() + "/reset-password");
                     return;
                 } else {
@@ -111,10 +120,12 @@ public class ServletResultRegister extends HttpServlet {
                     request.setAttribute("title", "Lấy lại mật khẩu thành công");
                     request.setAttribute("link", "signin");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 } else {
                     request.setAttribute("title", "Lấy lại mật khẩu thất bại");
                     request.setAttribute("link", "forgot-password");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 }
             } else if (sendResetPassword != null) {
                 if (sendResetPassword.equals("true")) {
@@ -122,10 +133,12 @@ public class ServletResultRegister extends HttpServlet {
                     request.setAttribute("message", "Kiểm tra email để lấy lại mật khẩu");
                     request.setAttribute("link", "signin");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 } else {
                     request.setAttribute("title", "Gửi email lấy mật khẩu thất bại");
                     request.setAttribute("link", "forgot-password");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 }
             }
         } else if (url.contains("/visit")) {
@@ -135,20 +148,32 @@ public class ServletResultRegister extends HttpServlet {
                     request.setAttribute("title", ContaiUtils.LOGIN_TRUE);
                     request.setAttribute("link", "checkout");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 } else {
                     request.setAttribute("title", "Tài khoản không chính xác");
                     request.setAttribute("link", "checkout");
                     request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
                 }
 
             }
         } else if (url.contains("/order")) {
-            String order = request.getParameter("payment-method");
-            if (order != null && order.equals("cod")) {
-                request.setAttribute("title", "Đã tạo đơn hàng");
+            String paymentSuccess = request.getParameter("payment-success");
+            if(paymentSuccess!=null && paymentSuccess.equals("true")){
+                request.setAttribute("title", "Đã thanh toán");
                 request.setAttribute("message", "Xin cảm ơn");
                 request.setAttribute("link", "");
                 request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                return;
+            }else{
+                String order = request.getParameter("payment-method");
+                if (order != null && order.equals("cod")) {
+                    request.setAttribute("title", "Đã tạo đơn hàng");
+                    request.setAttribute("message", "Xin cảm ơn");
+                    request.setAttribute("link", "");
+                    request.getRequestDispatcher("/views/account/resultRegister.jsp").forward(request, response);
+                    return;
+                }
             }
         }
 

@@ -16,7 +16,8 @@
             <td>
                 <c:if test="${staff.blocked}">
                     <button class="btnBlock btn btn-success mx-2">
-                        <a href="<c:url value="/admin/staff/unblock?email=${staff.email}"/>" class="btnBlock text-white">
+                        <a href="<c:url value="/admin/staff/unblock?email=${staff.email}"/>"
+                           class="btnBlock text-white">
                             Mở khoá</a>
                     </button>
                 </c:if>

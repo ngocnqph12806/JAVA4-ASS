@@ -119,14 +119,29 @@
                                         </div>
                                         <div class="product-action-link">
                                             <a href="#${product.id}" class="quick_view" data-toggle="modal"
-                                               data-target="#quick_view">
-                                                <span data-toggle="tooltip" data-placement="left" title="Quick view">
-                                                    <i class="fa fa-search"></i>
-                                                </span>
-                                            </a>
+                                               data-target="#quick_view"> <span
+                                                    data-toggle="tooltip" data-placement="left" title="Xem trước"><i
+                                                    class="fa fa-search"></i></span> </a>
                                             <c:if test="${not empty VISIT}">
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Wishlist"><i
-                                                        class="click_wish_list fa fa-heart-o"></i></a>
+                                                <c:if test="${empty lstLikeByVisit}">
+                                                    <a href="#${product.id}" class="click_like" data-toggle="tooltip"
+                                                       data-placement="left" title="Yêu thích"><i
+                                                            class="click_wish_list fa fa-heart-o"></i></a>
+                                                </c:if>
+                                                <c:set var="count" value="${0}"/>
+                                                <c:forEach items="${lstLikeByVisit}" var="likeByVisit">
+                                                    <c:if test="${likeByVisit == product.id}">
+                                                        <a href="#${product.id}" class="click_like"
+                                                           data-toggle="tooltip" data-placement="left" title="Đã thích"><i
+                                                                class="click_wish_list fa fa-heart"></i></a>
+                                                        <c:set var="count" value="${1}"/>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:if test="${count == 0}">
+                                                    <a href="#${product.id}" class="click_like" data-toggle="tooltip"
+                                                       data-placement="left" title="Yêu thích"><i
+                                                            class="click_wish_list fa fa-heart-o"></i></a>
+                                                </c:if>
                                             </c:if>
                                             <a href="#" data-toggle="tooltip" data-placement="left" title="Compare"><i
                                                     class="fa fa-refresh"></i></a>
@@ -227,21 +242,38 @@
                                                 - <fmt:formatNumber value="${max}" type="currency" currencySymbol=""/> ₫
                                             </c:if>
                                         </div>
-<%--                                        <p>--%>
-<%--                                            <c:set var="description"--%>
-<%--                                                   value="${fn:substring(product.description, 0, 200)}"/>--%>
-<%--                                            <c:out value="${description}" escapeXml="false"/>--%>
-<%--                                        </p>--%>
+                                            <%--                                        <p>--%>
+                                            <%--                                            <c:set var="description"--%>
+                                            <%--                                                   value="${fn:substring(product.description, 0, 200)}"/>--%>
+                                            <%--                                            <c:out value="${description}" escapeXml="false"/>--%>
+                                            <%--                                        </p>--%>
                                         <div class="product-list-action-link">
                                             <a class="buy-btn" href="#" data-toggle="tooltip" data-placement="top"
                                                title="Add to cart">go to buy <i class="fa fa-shopping-cart"></i> </a>
                                             <a href="#${product.id}" class="quick_view" data-toggle="modal"
                                                data-target="#quick_view"> <span
-                                                    data-toggle="tooltip" data-placement="top" title="Quick view"><i
+                                                    data-toggle="tooltip" data-placement="left" title="Xem trước"><i
                                                     class="fa fa-search"></i></span> </a>
                                             <c:if test="${not empty VISIT}">
-                                                <a href="#" data-toggle="tooltip" data-placement="left" title="Wishlist"><i
-                                                        class="click_wish_list fa fa-heart-o"></i></a>
+                                                <c:if test="${empty lstLikeByVisit}">
+                                                    <a href="#${product.id}" class="click_like" data-toggle="tooltip"
+                                                       data-placement="left" title="Yêu thích"><i
+                                                            class="click_wish_list fa fa-heart"></i></a>
+                                                </c:if>
+                                                <c:set var="count" value="${0}"/>
+                                                <c:forEach items="${lstLikeByVisit}" var="likeByVisit">
+                                                    <c:if test="${likeByVisit == product.id}">
+                                                        <a href="#${product.id}" class="click_like"
+                                                           data-toggle="tooltip" data-placement="left" title="Đã thích"><i
+                                                                class="click_wish_list fa fa-heart"></i></a>
+                                                        <c:set var="count" value="${1}"/>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:if test="${count == 0}">
+                                                    <a href="#${product.id}" class="click_like" data-toggle="tooltip"
+                                                       data-placement="left" title="Yêu thích"><i
+                                                            class="click_wish_list fa fa-heart-o"></i></a>
+                                                </c:if>
                                             </c:if>
                                             <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><i
                                                     class="fa fa-refresh"></i></a>

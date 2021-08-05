@@ -65,7 +65,7 @@ public class ServletAddBillImport extends HttpServlet {
                 EntityStaff entityStaff = _iServiceStaff.fingByEmail(emailStaffCheck);
                 if (entityStaff != null) {
                     entityBillImport.setEntityStaffCheck(entityStaff);
-                    entityBillImport.setEntityStaffImport(SessionUtils.getSessionUtils().getSessionStaff("user", request));
+                    entityBillImport.setEntityStaffImport((EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request));
                     List<EntityBillImportDetails> lstEntityBillImportDetails = new ArrayList<>();
                     EntityProductDetails entityProductDetails;
                     for (int i = 0; i < arrIdProduct.length; i++) {

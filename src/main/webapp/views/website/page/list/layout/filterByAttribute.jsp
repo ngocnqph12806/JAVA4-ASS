@@ -16,7 +16,7 @@
             <c:forEach items="${lstAttribute}" var="attribute">
                 <li><i class="fa fa-angle-right"></i>
                     <a href="#">
-                        ${attribute.name} - ${attribute.value}
+                            ${attribute.name} - ${attribute.value}
                     </a>
                     <span>
                         (

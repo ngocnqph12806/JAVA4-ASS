@@ -21,6 +21,9 @@
                 <button type="submit" class="btn btn-danger">
                     <a href="<c:url value="/admin/voucher/delete?id=${voucher.id}"/>">Xoá</a>
                 </button>
+                <button type="submit" class="btn btn-info">
+                    <a href="<c:url value="/admin/voucher/edit?id=${voucher.id}"/>">Sửa</a>
+                </button>
             </td>
         </tr>
     </c:if>

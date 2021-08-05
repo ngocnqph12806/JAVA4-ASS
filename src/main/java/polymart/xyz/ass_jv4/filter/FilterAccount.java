@@ -1,9 +1,6 @@
 package polymart.xyz.ass_jv4.filter;
 
-import polymart.xyz.ass_jv4.entity.EntityProductDetails;
-import polymart.xyz.ass_jv4.entity.EntityStaff;
-import polymart.xyz.ass_jv4.entity.EntityVisit;
-import polymart.xyz.ass_jv4.entity.EntityVoucher;
+import polymart.xyz.ass_jv4.entity.*;
 import polymart.xyz.ass_jv4.service.*;
 import polymart.xyz.ass_jv4.service.implement.*;
 import polymart.xyz.ass_jv4.utils.CookieUtils;
@@ -15,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static polymart.xyz.ass_jv4.utils.SessionUtils.getSessionUtils;
 
@@ -29,6 +28,7 @@ public class FilterAccount implements Filter {
     private IServiceBrand _iServiceBrand;
     private IServiceVoucher _iServiceVoucher;
     private IServiceVisit _iServiceVisit;
+    private IServiceLike _iServiceLike;
 
     public void init(FilterConfig config) throws ServletException {
         _iServiceProductDetails = new ServiceProductDetails();
@@ -38,6 +38,7 @@ public class FilterAccount implements Filter {
         _iServiceBrand = new ServiceBrand();
         _iServiceVoucher = new ServiceVoucher();
         _iServiceVisit = new ServiceVisit();
+        _iServiceLike = new ServiceLike();
     }
 
     public void destroy() {
@@ -92,39 +93,32 @@ public class FilterAccount implements Filter {
                 }
                 request1.setAttribute("lstCart", lstProductDetails);
             }
-            String voucher = SessionUtils.getSessionUtils().getSessionString("voucher", request1);
-            if (voucher != null && !voucher.trim().equals("")) {
-                EntityVoucher entityVoucher = _iServiceVoucher.findById(voucher);
-                if (entityVoucher != null) {
-                    request1.setAttribute("discountVoucher", entityVoucher.getPriceSale());
-                }
-            }
-            EntityVisit entityVisit = SessionUtils.getSessionUtils().getSessionVisit("visit", request1);
+            EntityVisit entityVisit = (EntityVisit) SessionUtils.getSessionUtils().getSessionModel("visit", new EntityVisit(), request1);
             if (entityVisit != null) {
                 entityVisit = _iServiceVisit.findByPhone(entityVisit.getPhoneNumber());
-//                if (entityVisit != null) {
-//                    request1.setAttribute("visit", entityVisit);
-//                }else{
-//                    SessionUtils.getSessionUtils().removeSession("visit", request1);
-//                }
-                request1.setAttribute("visit", entityVisit);
+                if (entityVisit != null) {
+                    request1.setAttribute("visit", entityVisit);
+                    Set<Integer> lstLike = new HashSet<>();
+                    for (EntityLike x : _iServiceLike.findAll()) {
+                        if (x.getEntityVisit().getPhoneNumber().equals(entityVisit.getPhoneNumber())) {
+                            lstLike.add(x.getEntityProduct().getId());
+                        }
+                    }
+                    request1.setAttribute("lstLikeByVisit", lstLike);
+                } else {
+                    SessionUtils.getSessionUtils().removeSession("visit", request1);
+                }
+//                request1.setAttribute("visit", entityVisit);
             }
-            request1.setAttribute("lstNewImportProduct", _iServiceProduct.findNewImportProduct());
-            request1.setAttribute("lstHotProduct", _iServiceProduct.findHotProduct());
-            request1.setAttribute("product1", _iServiceProduct.findNewProduct().get(0));
             request1.setAttribute("lstCategory", _iServiceCategory.findAll());
             request1.setAttribute("lstBrand", _iServiceBrand.findAll());
             request1.setAttribute("lstTopBuyProduct", _iServiceProduct.findByTopBuy());
-            request1.setAttribute("lstNewProduct", _iServiceProduct.findNewProduct());
-            request1.setAttribute("lstHotSaleProduct", _iServiceProduct.findHotSaleProduct());
-            request1.setAttribute("lstMostViewProduct", _iServiceProduct.findMostViewedProduct());
-            request1.setAttribute("lstShowBanner", _iServiceBanner.findShowBanner());
             chain.doFilter(request, response);
         }
     }
 
     private boolean getModelStaff(HttpServletRequest request1) {
-        EntityStaff modelStaff = getSessionUtils().getSessionStaff("user", request1);
+        EntityStaff modelStaff = (EntityStaff) getSessionUtils().getSessionModel("user", new EntityStaff(), request1);
         if (modelStaff != null && modelStaff.getEmail() != null) {
             IServiceAccount iServiceAccount = new ServiceAccount();
             modelStaff = iServiceAccount.findByEmail(modelStaff.getEmail());

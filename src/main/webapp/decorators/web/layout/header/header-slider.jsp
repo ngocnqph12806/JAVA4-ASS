@@ -9,7 +9,8 @@
     </div>
     <nav class="category-menu category-style-2">
         <ul>
-            <li class="menu-item-has-children"><a href="<c:url value="/product"/>"><i class="fa fa-camera"></i> camera</a>
+            <li class="menu-item-has-children"><a href="<c:url value="/product"/>"><i class="fa fa-camera"></i>
+                camera</a>
                 <!-- Mega Category Menu Start -->
                 <ul class="category-mega-menu">
                     <li class="menu-item-has-children">

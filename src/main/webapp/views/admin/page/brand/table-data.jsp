@@ -19,10 +19,10 @@
             <td>${brand.address}</td>
             <td>${brand.description}</td>
             <td>
-<%--                <button class="btn btn-danger mx-2">--%>
-<%--                    <a href="<c:url value="/admin/brand/quan-ly-thuong-hieu?remove=true&id=${brand.id}"/>"--%>
-<%--                       class="text-white">Xoá</a>--%>
-<%--                </button>--%>
+                    <%--                <button class="btn btn-danger mx-2">--%>
+                    <%--                    <a href="<c:url value="/admin/brand/quan-ly-thuong-hieu?remove=true&id=${brand.id}"/>"--%>
+                    <%--                       class="text-white">Xoá</a>--%>
+                    <%--                </button>--%>
                 <button class="btn btn-info mx-2">
                     <a href="<c:url value="/admin/brand/edit?id=${brand.id}"/>" class="text-white">Sửa</a>
                 </button>

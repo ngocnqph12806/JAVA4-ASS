@@ -94,4 +94,18 @@ public class EntityVisit {
     public void setLstEntityPayments(List<EntityPayment> lstEntityPayments) {
         this.lstEntityPayments = lstEntityPayments;
     }
+
+    @Override
+    public String toString() {
+        return "EntityVisit{" +
+                "phoneNumber='" + phoneNumber + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", note='" + note + '\'' +
+                ", lstEntityPayments=" + lstEntityPayments +
+                ", lstEntityLikes=" + lstEntityLikes +
+                '}';
+    }
 }

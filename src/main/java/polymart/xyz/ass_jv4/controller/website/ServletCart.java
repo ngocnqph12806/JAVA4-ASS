@@ -85,6 +85,14 @@ public class ServletCart extends HttpServlet {
 //            request.setAttribute("lstCart", lstProductDetails);
 //        }
 
+        String voucher = SessionUtils.getSessionUtils().getSessionString("voucher", request);
+        if (voucher != null && !voucher.trim().equals("")) {
+            EntityVoucher entityVoucher = _iServiceVoucher.findById(voucher);
+            if (entityVoucher != null) {
+                request.setAttribute("discountVoucher", entityVoucher.getPriceSale());
+            }
+        }
+
         request.getRequestDispatcher("/views/website/page/cart/cart.jsp").forward(request, response);
     }
 

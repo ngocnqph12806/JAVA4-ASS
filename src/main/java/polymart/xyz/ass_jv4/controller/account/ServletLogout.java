@@ -12,6 +12,7 @@ public class ServletLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         getSessionUtils().removeSession("user", request);
+        getSessionUtils().removeSession("visit", request);
         response.sendRedirect(request.getContextPath() + "/");
     }
 

@@ -5,6 +5,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
 import polymart.xyz.ass_jv4.entity.EntityBanner;
+import polymart.xyz.ass_jv4.entity.EntityStaff;
 import polymart.xyz.ass_jv4.service.IServiceBanner;
 import polymart.xyz.ass_jv4.service.implement.ServiceBanner;
 import polymart.xyz.ass_jv4.utils.FormatUtils;
@@ -52,7 +53,7 @@ public class ServletAddBanner extends HttpServlet {
             System.out.println("registert date");
             BeanUtils.populate(entityBanner, request.getParameterMap());
             System.out.println("bean utils");
-            entityBanner.setEntityStaff(SessionUtils.getSessionUtils().getSessionStaff("user", request));
+            entityBanner.setEntityStaff((EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request));
             entityBanner.setDateEnded(FormatUtils.getFormatUtils().stringToDate(request.getParameter("dateEnded")));
             entityBanner.setDateCreated(new Date());
             System.out.println(entityBanner);

@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
+import polymart.xyz.ass_jv4.entity.EntityStaff;
 import polymart.xyz.ass_jv4.entity.EntityVoucher;
 import polymart.xyz.ass_jv4.service.IServiceVoucher;
 import polymart.xyz.ass_jv4.service.implement.ServiceVoucher;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
-@WebServlet(name = "ServletVoucherHome", value = {"/admin/voucher", "/admin/voucher/delete", "/admin/voucher/add"})
+@WebServlet(name = "ServletVoucherHome", value = {"/admin/voucher", "/admin/voucher/delete", "/admin/voucher/add", "/admin/voucher/edit"})
 public class ServletVoucherHome extends HttpServlet {
 
     private IServiceVoucher _iServiceVoucher;
@@ -35,7 +36,7 @@ public class ServletVoucherHome extends HttpServlet {
         String url = request.getRequestURI();
         if (url.contains("/admin/voucher/delete")) {
             String id = request.getParameter("id");
-            EntityVoucher entityVoucher = _iServiceVoucher.findById(id);
+            EntityVoucher entityVoucher = _iServiceVoucher.findByIdEdit(id);
             if (entityVoucher != null) {
                 entityVoucher.setRemoved(true);
                 _iServiceVoucher.updateVoucher(entityVoucher);
@@ -45,8 +46,21 @@ public class ServletVoucherHome extends HttpServlet {
         } else if (url.contains("/admin/voucher/add")) {
             request.getRequestDispatcher("/views/admin/page/voucher/addVoucher.jsp").forward(request, response);
             return;
+        } else if (url.contains("/admin/voucher/edit")) {
+            String id = request.getParameter("id");
+            EntityVoucher entityVoucher = _iServiceVoucher.findByIdEdit(id);
+            if (entityVoucher != null) {
+                SessionUtils.getSessionUtils().saveSessionModel("editvoucher", entityVoucher, request);
+                request.setAttribute("voucher", entityVoucher);
+                request.setAttribute("editVoucher", true);
+                request.setAttribute("dateStart", FormatUtils.getFormatUtils().dateToString(entityVoucher.getDateStart()));
+                request.setAttribute("dateEnd", FormatUtils.getFormatUtils().dateToString(entityVoucher.getDateEnd()));
+                request.getRequestDispatcher("/views/admin/page/voucher/addVoucher.jsp").forward(request, response);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/voucher");
+            }
+            return;
         }
-
         request.setAttribute("lstVoucher", _iServiceVoucher.findAll());
         request.getRequestDispatcher("/views/admin/page/voucher/home.jsp").forward(request, response);
     }
@@ -55,7 +69,11 @@ public class ServletVoucherHome extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        String url = request.getRequestURI();
         EntityVoucher entityVoucher = new EntityVoucher();
+        if (url.contains("/admin/voucher/edit")) {
+            entityVoucher = (EntityVoucher) SessionUtils.getSessionUtils().getSessionModel("editvoucher", entityVoucher, request);
+        }
         try {
             DateTimeConverter dtConverter = new DateConverter(new Date());
             dtConverter.setPattern("yyyy-MM-dd");
@@ -65,17 +83,30 @@ public class ServletVoucherHome extends HttpServlet {
             entityVoucher.setDateStart(getDate);
             getDate = FormatUtils.getFormatUtils().stringToDate(request.getParameter("dateEnd"));
             entityVoucher.setDateEnd(getDate);
-            entityVoucher.setEntityStaff(SessionUtils.getSessionUtils().getSessionStaff("user", request));
-            if (_iServiceVoucher.newVoucher(entityVoucher)) {
-                response.sendRedirect(request.getContextPath() + "/admin/voucher");
-                return;
-            } else {
-                request.setAttribute("errorAddVoucher", "Thêm mã giảm giá thất bại");
+            entityVoucher.setEntityStaff((EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request));
+            entityVoucher.setReQuantity(entityVoucher.getQuantity());
+            if (url.contains("/admin/voucher/add")) {
+                if (_iServiceVoucher.newVoucher(entityVoucher)) {
+                    response.sendRedirect(request.getContextPath() + "/admin/voucher");
+                    return;
+                } else {
+                    request.setAttribute("errorAddVoucher", "Thêm mã giảm giá thất bại");
+                }
+            } else if (url.contains("/admin/voucher/edit")) {
+                if (_iServiceVoucher.updateVoucher(entityVoucher)) {
+                    response.sendRedirect(request.getContextPath() + "/admin/voucher");
+                    return;
+                } else {
+                    request.setAttribute("errorAddVoucher", "Sửa mã giảm giá thất bại");
+                }
             }
         } catch (IllegalAccessException | InvocationTargetException e) {
             request.setAttribute("errorAddVoucher", "Lỗi dữ liệu đầu vào");
             e.printStackTrace();
         }
+        request.setAttribute("voucher", entityVoucher);
+        request.setAttribute("dateStart", FormatUtils.getFormatUtils().dateToString(entityVoucher.getDateStart()));
+        request.setAttribute("dateEnd", FormatUtils.getFormatUtils().dateToString(entityVoucher.getDateEnd()));
         request.getRequestDispatcher("/views/admin/page/voucher/addVoucher.jsp").forward(request, response);
     }
 }

@@ -36,7 +36,7 @@ public class ServletProfile extends HttpServlet {
 
         String id = request.getParameter("id");
         if (id != null) {
-            EntityStaff entityStaff = SessionUtils.getSessionUtils().getSessionStaff("user", request);
+            EntityStaff entityStaff = (EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request);
             System.out.println(entityStaff);
             if (id.equals(entityStaff.getId() + "")) {
                 request.setAttribute("birthday", FormatUtils.getFormatUtils().dateToString(entityStaff.getBirthday()));
@@ -53,7 +53,7 @@ public class ServletProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        EntityStaff entityStaff = SessionUtils.getSessionUtils().getSessionStaff("user", request);
+        EntityStaff entityStaff = (EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request);
         if (entityStaff != null) {
             try {
                 DateTimeConverter dtConverter = new DateConverter(new Date());
@@ -66,7 +66,7 @@ public class ServletProfile extends HttpServlet {
                 if (request.getPart("avatar") != null && !request.getPart("avatar").getSubmittedFileName().equals("")) {
                     entityStaff.setAvatar(BeanModelUtils.getBeanModel().setFileModel(request, "avatar", PathFileUtils.getPathFile().avatar));
                 }
-                if (!_iServiceStaff.editStaff(entityStaff, SessionUtils.getSessionUtils().getSessionStaff("user", request).getEmail())) {
+                if (!_iServiceStaff.editStaff(entityStaff, ((EntityStaff) SessionUtils.getSessionUtils().getSessionModel("user", new EntityStaff(), request)).getEmail())) {
                     request.setAttribute("staff", entityStaff);
                     request.setAttribute("editError", "Chỉnh sửa thất bại");
                     request.getRequestDispatcher("/views/admin/page/staff/editStaff.jsp").forward(request, response);

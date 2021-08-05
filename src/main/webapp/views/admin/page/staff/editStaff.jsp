@@ -44,7 +44,8 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group form-material">
                                             <label>Ngày sinh: </label>
-                                            <input id="birthday" name="birthday" type="date" class="form-control" value="${birthday}" />
+                                            <input id="birthday" name="birthday" type="date" class="form-control"
+                                                   value="${birthday}"/>
                                             <%--                                            <input id="birthday" name="birthday" type="date" class="form-control"--%>
                                             <%--                                                   placeholder="2017-06-04" id="mdate"--%>
                                             <%--                                                   value="<fmt:formatDate value="${staff.birthday}" pattern="yyyy-MM-dd" />">--%>

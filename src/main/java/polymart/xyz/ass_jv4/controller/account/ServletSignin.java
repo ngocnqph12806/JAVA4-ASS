@@ -63,7 +63,7 @@ public class ServletSignin extends HttpServlet {
                                 getSessionUtils().removeSession("email", request);
                                 getSessionUtils().removeSession("password", request);
                             }
-                            getSessionUtils().saveSessionStaff("user", entityStaff, request);
+                            getSessionUtils().saveSessionModel("user", entityStaff, request);
                             response.sendRedirect(request.getContextPath() + "/account?result=signin-successfully");
                             return;
                         }

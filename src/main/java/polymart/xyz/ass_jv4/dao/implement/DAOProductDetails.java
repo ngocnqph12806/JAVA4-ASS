@@ -28,7 +28,7 @@ public class DAOProductDetails extends AbstractDAO<EntityProductDetails> impleme
 
     @Override
     public boolean updateProductDetails(EntityProductDetails entityProductDetails) {
-        if(findById(entityProductDetails.getId()+"")!=null){
+        if (findById(entityProductDetails.getId() + "") != null) {
             return update(entityProductDetails, ContaiUtils.UPDATE);
         }
         return false;

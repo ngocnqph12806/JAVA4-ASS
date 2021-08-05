@@ -40,11 +40,28 @@
                     </div>
                     <div class="product-action-link">
                         <a href="#${productTopBuy.id}" class="quick_view" data-toggle="modal" data-target="#quick_view"> <span
-                                data-toggle="tooltip" data-placement="left" title="Quick view"><i
+                                data-toggle="tooltip" data-placement="left" title="Xem trước"><i
                                 class="fa fa-search"></i></span> </a>
                         <c:if test="${not empty VISIT}">
-                            <a href="#" data-toggle="tooltip" data-placement="left" title="Wishlist"><i
-                                    class="click_wish_list fa fa-heart-o"></i></a>
+                            <c:if test="${empty lstLikeByVisit}">
+                                <a href="#${productTopBuy.id}" class="click_like" data-toggle="tooltip"
+                                   data-placement="left" title="Yêu thích"><i
+                                        class="click_wish_list fa fa-heart"></i></a>
+                            </c:if>
+                            <c:set var="count" value="${0}"/>
+                            <c:forEach items="${lstLikeByVisit}" var="likeByVisit">
+                                <c:if test="${likeByVisit == productTopBuy.id}">
+                                    <a href="#${productTopBuy.id}" class="click_like" data-toggle="tooltip"
+                                       data-placement="left" title="Đã thích"><i
+                                            class="click_wish_list fa fa-heart"></i></a>
+                                    <c:set var="count" value="${1}"/>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${count == 0}">
+                                <a href="#${productTopBuy.id}" class="click_like" data-toggle="tooltip"
+                                   data-placement="left" title="Yêu thích"><i
+                                        class="click_wish_list fa fa-heart-o"></i></a>
+                            </c:if>
                         </c:if>
                         <a href="#" data-toggle="tooltip" data-placement="left" title="Compare"><i
                                 class="fa fa-refresh"></i></a>
