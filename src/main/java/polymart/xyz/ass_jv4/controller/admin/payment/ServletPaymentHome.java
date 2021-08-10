@@ -61,7 +61,7 @@ public class ServletPaymentHome extends HttpServlet {
                                 }
                                 response.sendRedirect(request.getContextPath() + "/admin/payments");
                                 return;
-                            }else{
+                            } else {
                                 request.setAttribute("errorPayment", "Cập nhật trạng thái thất bại!");
                             }
                         } else {

@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/commont/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -10,6 +11,8 @@
     <%@include file="layout/head.jsp" %>
 </head>
 <body>
+<fmt:setLocale value="${LANG}"/>
+<fmt:setBundle basename="polymart.xyz.i18n.lang" scope="request"/>
 
 <jsp:include page="layout/switcherColor.jsp"/>
 
@@ -29,7 +32,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Đăng nhập</h5>
+                <h5 class="modal-title"><fmt:message key="HEADER.TOP.DANGNHAP"/></h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
@@ -37,11 +40,11 @@
                 <form id="idloginvisit" action="<c:url value="/checkout"/>" method="post">
                     <div class="single-input-item">
                         <input type="text" id="login-phoneNumber" name="login-phoneNumber"
-                               placeholder="Nhập số diện thoại" required/>
+                               placeholder="<fmt:message key="SODIENTHOAI"/>" required/>
                     </div>
                     <div class="single-input-item">
-                        <input type="password" id="login-password" name="login-password" placeholder="Nhập mật khẩu"
-                               required/>
+                        <input type="password" id="login-password" name="login-password"
+                               placeholder="<fmt:message key="MATKHAU"/>" required/>
                     </div>
                     <%--                    <div class="single-input-item">--%>
                     <%--                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">--%>
@@ -55,7 +58,7 @@
                     <%--                        </div>--%>
                     <%--                    </div>--%>
                     <div class="single-input-item">
-                        <button class="sqr-btn">Đăng nhập</button>
+                        <button class="sqr-btn"><fmt:message key="HEADER.TOP.DANGNHAP"/></button>
                     </div>
                 </form>
             </div>

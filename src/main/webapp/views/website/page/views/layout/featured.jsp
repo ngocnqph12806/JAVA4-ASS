@@ -11,7 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="sidebar-widget mb-22">
     <div class="section-title-2 d-flex justify-content-between mb-28">
-        <h3>TOP mua nhiều nhất</h3>
+        <h3><fmt:message key="CONTENT.MENU.MUANHIEUNHAT"/></h3>
         <div class="category-append"></div>
     </div> <!-- section title end -->
     <div class="category-carousel-active row" data-row="4">

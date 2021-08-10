@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: quang
@@ -13,13 +14,19 @@
             <div class="product-review-info">
                 <ul class="nav review-tab">
                     <li>
-                        <a class="active" data-toggle="tab" href="#tab_one">description</a>
+                        <a class="active" data-toggle="tab" href="#tab_one">
+                            <fmt:message key="CONTENT.DETAILS.MOTA"/>
+                        </a>
                     </li>
                     <li>
-                        <a data-toggle="tab" href="#tab_two">information</a>
+                        <a data-toggle="tab" href="#tab_two">
+                            <fmt:message key="CONTENT.DETAILS.THONGSO"/>
+                        </a>
                     </li>
                     <li>
-                        <a data-toggle="tab" href="#tab_three">reviews</a>
+                        <a data-toggle="tab" href="#tab_three">
+                            <fmt:message key="CONTENT.DETAILS.DANHGIA"/>
+                        </a>
                     </li>
                 </ul>
                 <div class="tab-content reviews-tab">

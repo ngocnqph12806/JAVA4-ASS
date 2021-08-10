@@ -22,9 +22,14 @@ public class ServletPaymentSuccess extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String vnp_TxnRef = request.getParameter("vnp_TxnRef");
-        if (vnp_TxnRef != null) {
+        String vnp_BankTranNo = request.getParameter("vnp_BankTranNo");
+        String vnp_TransactionNo = request.getParameter("vnp_TransactionNo");
+        String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
+        if (vnp_TxnRef != null && Integer.parseInt(vnp_TxnRef) > 0
+                && vnp_BankTranNo != null && vnp_ResponseCode != null && vnp_ResponseCode.equals("00")
+                && vnp_TransactionNo != null && Integer.parseInt(vnp_TransactionNo) > 0) {
             EntityPayment entityPayment = _iServicePayment.findById(vnp_TxnRef);
-            if (entityPayment != null) {
+            if (entityPayment != null && !entityPayment.isStatusPayment()) {
                 entityPayment.setStatusPayment(true);
                 _iServicePayment.updatePayment(entityPayment);
                 response.sendRedirect(request.getContextPath() + "/order?payment-success=true");

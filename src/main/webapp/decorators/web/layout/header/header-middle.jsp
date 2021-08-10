@@ -19,8 +19,8 @@
                                 <i class="fa fa-clock-o"></i>
                             </div>
                             <div class="shipping-content">
-                                <h5>Thời gian làm việc</h5>
-                                <span>Cả tuần: 8.00 - 18.00</span>
+                                <h5><fmt:message key="HEADER.MIDDLE.THOIDIANLAMVIEC"/></h5>
+                                <span><fmt:message key="HEADER.MIDDLE.CATUAN"/></span>
                             </div>
                         </div> <!-- end single shipping -->
                         <div class="single-block-shipping">
@@ -28,8 +28,8 @@
                                 <i class="fa fa-truck"></i>
                             </div>
                             <div class="shipping-content">
-                                <h5>Miễn phí giao hàng</h5>
-                                <span>Đơn hàng trên 2 triệu</span>
+                                <h5><fmt:message key="HEADER.MIDDLE.MIENPHIGIAOHANG"/></h5>
+                                <span><fmt:message key="HEADER.MIDDLE.DONTREN2TRIEU"/></span>
                             </div>
                         </div> <!-- end single shipping -->
                         <div class="single-block-shipping">
@@ -37,14 +37,15 @@
                                 <i class="fa fa-money"></i>
                             </div>
                             <div class="shipping-content">
-                                <h5>Hoàn tiền 100%</h5>
-                                <span>Trong 30 ngày nếu sản phẩm lỗi</span>
+                                <h5><fmt:message key="HEADER.MIDDLE.HOANTIEN"/></h5>
+                                <span><fmt:message key="HEADER.MIDDLE.TRONG30NGAY"/></span>
                             </div>
                         </div> <!-- end single shipping -->
                     </div>
                     <div class="header-middle-block">
                         <div class="header-middle-searchbox">
-                            <input id="search-name-product" type="text" placeholder="Tìm kiếm theo tên sản phẩm...">
+                            <input id="search-name-product" type="text"
+                                   placeholder="<fmt:message key="HEADER.MIDDLE.TIMKIEM"/>">
                             <button onclick="clickSearch()" class="search-btn"><i class="fa fa-search"></i></button>
                         </div>
                         <script>

@@ -120,8 +120,6 @@
             </div>
         </div>
         <form id="idformorder" action="<c:url value="/payment/order"/>" method="post">
-
-
             <div class="row">
                 <!-- Checkout Billing Details -->
                 <div class="col-lg-6">
@@ -260,7 +258,8 @@
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="vnpay" name="payments" value="vnpay"
                                                    class="custom-control-input"/>
-                                            <label class="custom-control-label" for="vnpay">Thanh toán trực tuyến</label>
+                                            <label class="custom-control-label" for="vnpay">Thanh toán trực
+                                                tuyến</label>
                                         </div>
                                     </div>
                                 </div>
@@ -293,8 +292,6 @@
                 if (checkPassword(password)) {
                     // sendMethod();
                     document.getElementById('idformorder').submit();
-                } else {
-                    return;
                 }
             } else {
                 // sendMethod();

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: quang
@@ -8,7 +9,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <title>${product.name}</title>
-
+<fmt:setLocale value="${LANG}"/>
+<fmt:setBundle basename="polymart.xyz.i18n.lang" scope="request"/>
 <!-- breadcrumb area start -->
 <div class="breadcrumb-area">
     <div class="container">

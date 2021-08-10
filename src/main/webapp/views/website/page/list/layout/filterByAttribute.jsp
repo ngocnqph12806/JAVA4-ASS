@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: quang
@@ -9,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="sidebar-widget mb-30">
     <div class="sidebar-title mb-10">
-        <h3>Thuộc tính</h3>
+        <h3><fmt:message key="CONTENT.MENU.THUOCTINH"/></h3>
     </div>
     <div class="sidebar-widget-body">
         <ul>

@@ -14,7 +14,9 @@
         <div class="title-icon">
             <i class="fa fa-flask"></i>
         </div>
-        <h3>Mới nhập</h3>
+        <h3>
+            <fmt:message key="CONTENT.MENU.MOINHAP"/>
+        </h3>
     </div> <!-- section title end -->
     <!-- featured category start -->
     <div class="featured-carousel-active slick-padding slick-arrow-style">

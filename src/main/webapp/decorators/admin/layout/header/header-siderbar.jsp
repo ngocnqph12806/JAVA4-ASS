@@ -24,6 +24,7 @@ Sidebar start
                 <ul aria-expanded="false">
                     <li><a href="<c:url value="/admin/banner"/>">Quản lý banner website</a></li>
                     <li><a href="<c:url value="/admin/voucher"/>">Quản lý mã giảm giá</a></li>
+                    <li><a href="<c:url value="/admin/contact"/>">Phản hồi cửa hàng</a></li>
                 </ul>
             </li>
             <li class="mega-menu mega-menu-sm">

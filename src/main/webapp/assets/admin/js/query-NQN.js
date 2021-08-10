@@ -270,7 +270,7 @@ function sweetConfirm(title, message, textBtn, titleSuccess, messageSuccess) {
 
 function sweetSuccessCancel(title, message, textBtnYes, textBtnCancel,
                             titleSuccess, messageSuccess, titleCancel, messageCancel) {
-    swal({
+    (swal({
         title: title,
         text: message,
         type: "warning",
@@ -282,7 +282,7 @@ function sweetSuccessCancel(title, message, textBtnYes, textBtnCancel,
         closeOnCancel: !1
     }, function (e) {
         e ? swal(titleSuccess, messageSuccess, "success") : swal(titleCancel, messageCancel, "error")
-    })
+    }))
 }
 
 function sweetImageMessage(title, message, linkImage) {

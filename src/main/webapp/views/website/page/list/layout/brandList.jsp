@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: quang
@@ -10,7 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="sidebar-widget mb-30">
     <div class="sidebar-title mb-10">
-        <h3>Thương hiệu</h3>
+        <h3><fmt:message key="HEADER.SIDEBAR.HANG"/></h3>
     </div>
     <div class="sidebar-widget-body">
         <ul>

@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<title>PolyMart - Camera an ninh</title>
+<fmt:setLocale value="${LANG}"/>
+<fmt:setBundle basename="polymart.xyz.i18n.lang" scope="request"/>
+<title><fmt:message key="TITLE.HOME"/></title>
 
 <jsp:include page="layout/banner.jsp"/>
 

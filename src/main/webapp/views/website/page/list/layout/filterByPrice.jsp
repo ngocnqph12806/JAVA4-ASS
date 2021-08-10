@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: quang
@@ -9,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="sidebar-widget mb-30">
     <div class="sidebar-title mb-10">
-        <h3>lọc theo khoảng giá</h3>
+        <h3><fmt:message key="CONTENT.FILTER.LOCTHEOGIA"/></h3>
     </div>
     <div class="sidebar-widget-body">
         <div class="price-range-wrap">
@@ -32,7 +33,7 @@
             <div id="filterPrice" class="price-range" data-min="${min}" data-max="${max}"></div>
             <div class="range-slider">
                 <form id="idformfilterprice" action="#" class="d-flex justify-content-between">
-                    <button class="filter-btn">Lọc</button>
+                    <button class="filter-btn"><fmt:message key="CONTENT.FILTER.BTN"/></button>
                     <%--                        <label for="amount">Giá: </label>--%>
                     <input type="text" id="amount" disabled/>
                 </form>

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: quang
@@ -11,7 +12,7 @@
 <div class="sidebar-widget mb-30">
     <div class="sidebar-category">
         <ul>
-            <li class="title"><i class="fa fa-bars"></i> categories</li>
+            <li class="title"><i class="fa fa-bars"></i><fmt:message key="HEADER.SIDEBAR.LOAI"/></li>
             <c:forEach items="${lstCategory}" var="category">
                 <li>
                     <a href="<c:url value="/category?id=${category.id}"/>">${category.name}</a><span>(${fn:length(category.lstEntityProducts)})</span>

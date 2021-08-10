@@ -3,13 +3,32 @@ package polymart.xyz.ass_jv4.utils;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Properties;
+
+import static java.lang.Thread.sleep;
 
 public class MailUtils {
 
     private static MailUtils mailUtils;
+    private static Thread thread;
 
-    public static void sendMail(String emailTo, String titleMail, String body) throws MessagingException {
+    public void sendMailAll(List<String> lstMailTo, String titleMail, String body) throws MessagingException {
+        final int[] i = {0};
+        thread = new Thread(() -> {
+            try {
+                for (i[0] = 0; i[0] < lstMailTo.size(); i[0]++) {
+                    System.out.println("send mail: " + lstMailTo.get(i[0]));
+                    sendMail(lstMailTo.get(i[0]), titleMail, body);
+                }
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+    }
+
+    public void sendMail(String emailTo, String titleMail, String body) throws MessagingException {
         Properties properties = new Properties();
         properties.setProperty("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.starttls.enable", "true");
@@ -41,5 +60,4 @@ public class MailUtils {
         }
         return mailUtils;
     }
-
 }

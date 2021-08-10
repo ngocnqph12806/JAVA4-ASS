@@ -82,8 +82,9 @@
                                                 ${details.quantity}
                                         </td>
                                         <td class="pro-subtotal">
-                                            <fmt:formatNumber value="${details.price * details.quantity - details.priceSale}"
-                                                              type="currency" currencySymbol=""/>₫
+                                            <fmt:formatNumber
+                                                    value="${(details.entityProductDetails.price- details.priceSale) * details.quantity}"
+                                                    type="currency" currencySymbol=""/>₫
                                         </td>
                                     </tr>
                                 </c:forEach>

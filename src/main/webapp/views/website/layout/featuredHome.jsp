@@ -14,7 +14,9 @@
         <div class="title-icon">
             <i class="fa fa-bookmark"></i>
         </div>
-        <h3>Mua nhiều nhất</h3>
+        <h3>
+            <fmt:message key="CONTENT.MENU.MUANHIEUNHAT"/>
+        </h3>
     </div> <!-- section title end -->
     <!-- featured category start -->
     <div class="featured-carousel-active slick-padding slick-arrow-style">

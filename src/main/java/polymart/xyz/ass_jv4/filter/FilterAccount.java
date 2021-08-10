@@ -22,21 +22,17 @@ import static polymart.xyz.ass_jv4.utils.SessionUtils.getSessionUtils;
 public class FilterAccount implements Filter {
 
     private IServiceProductDetails _iServiceProductDetails;
-    private IServiceBanner _iServiceBanner;
     private IServiceProduct _iServiceProduct;
     private IServiceCategory _iServiceCategory;
     private IServiceBrand _iServiceBrand;
-    private IServiceVoucher _iServiceVoucher;
     private IServiceVisit _iServiceVisit;
     private IServiceLike _iServiceLike;
 
     public void init(FilterConfig config) throws ServletException {
         _iServiceProductDetails = new ServiceProductDetails();
-        _iServiceBanner = new ServiceBanner();
         _iServiceProduct = new ServiceProduct();
         _iServiceCategory = new ServiceCategory();
         _iServiceBrand = new ServiceBrand();
-        _iServiceVoucher = new ServiceVoucher();
         _iServiceVisit = new ServiceVisit();
         _iServiceLike = new ServiceLike();
     }
@@ -64,6 +60,12 @@ public class FilterAccount implements Filter {
             }
             chain.doFilter(request, response);
         } else {
+            String lang = request.getParameter("lang");
+            if (lang != null) {
+                SessionUtils.getSessionUtils().saveSession("lang", lang, request1);
+                response1.sendRedirect(request1.getRequestURI());
+                return;
+            }
             String cookie = CookieUtils.getCookieUtils().getCookieUtils("cart", request1);
             if (cookie != null && !cookie.trim().equals("")) {
                 String[] arrCart = cookie.split("c");
@@ -83,9 +85,13 @@ public class FilterAccount implements Filter {
                     entityProductDetails = _iServiceProductDetails.findById(arrId[i]);
                     if (entityProductDetails != null) {
                         try {
-                            int sl = Integer.parseInt(arrQuantity[i]);
-                            entityProductDetails.setQuantity(sl);
-                            lstProductDetails.add(entityProductDetails);
+                            EntityProductDetails fake = new EntityProductDetails();
+                            fake.setId(entityProductDetails.getId());
+                            fake.setPrice(entityProductDetails.getPrice());
+                            fake.setQuantity(Integer.parseInt(arrQuantity[i]));
+                            fake.setEntityAttribute(entityProductDetails.getEntityAttribute());
+                            fake.setEntityProduct(entityProductDetails.getEntityProduct());
+                            lstProductDetails.add(fake);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -108,7 +114,6 @@ public class FilterAccount implements Filter {
                 } else {
                     SessionUtils.getSessionUtils().removeSession("visit", request1);
                 }
-//                request1.setAttribute("visit", entityVisit);
             }
             request1.setAttribute("lstCategory", _iServiceCategory.findAll());
             request1.setAttribute("lstBrand", _iServiceBrand.findAll());

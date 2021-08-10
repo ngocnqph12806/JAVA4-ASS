@@ -64,6 +64,8 @@ public class EntityStaff {
     private List<EntityProduct> lstEntityProductss;
     @OneToMany(mappedBy = "entityStaff")
     private List<EntityVoucher> lstEntityVouchers;
+    @OneToMany(mappedBy = "entityStaff")
+    private List<EntityRepContact> entityStaff;
 
     public int getId() {
         return id;
@@ -239,5 +241,13 @@ public class EntityStaff {
 
     public void setLstEntityVouchers(List<EntityVoucher> lstEntityVouchers) {
         this.lstEntityVouchers = lstEntityVouchers;
+    }
+
+    public List<EntityRepContact> getEntityStaff() {
+        return entityStaff;
+    }
+
+    public void setEntityStaff(List<EntityRepContact> entityStaff) {
+        this.entityStaff = entityStaff;
     }
 }

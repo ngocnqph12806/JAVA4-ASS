@@ -14,7 +14,7 @@
             <div class="title-icon">
                 <i class="fa fa-flash"></i>
             </div>
-            <h3>Sản phẩm hot nhất</h3>
+            <h3><fmt:message key="CONTENT.MENU.SANPHAMHOTNHAT"/></h3>
         </div> <!-- section title end -->
         <!-- featured category start -->
         <div class="latest-product-active slick-padding slick-arrow-style">

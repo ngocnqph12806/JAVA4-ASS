@@ -45,7 +45,7 @@ public class ServletViewProduct extends HttpServlet {
         if (name != null) {
             List<EntityProduct> lst = new ArrayList<>();
             for (EntityProduct x : _iServiceProduct.findAll()) {
-                if(x.getName().toLowerCase().contains(name.toLowerCase())){
+                if (x.getName().toLowerCase().contains(name.toLowerCase())) {
                     lst.add(x);
                 }
             }

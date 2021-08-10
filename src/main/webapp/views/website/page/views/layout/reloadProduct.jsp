@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: quang
@@ -12,7 +13,7 @@
         <div class="title-icon">
             <i class="fa fa-desktop"></i>
         </div>
-        <h3>related products</h3>
+        <h3><fmt:message key="CONTENT.MENU.SANPHAMNGAUNHIEN"/></h3>
     </div> <!-- section title end -->
     <!-- featured category start -->
     <div class="featured-carousel-active slick-padding slick-arrow-style">

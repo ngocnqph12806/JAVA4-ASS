@@ -8,7 +8,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<title>Danh sách hoá đơn</title>
+<fmt:setLocale value="${LANG}"/>
+<fmt:setBundle basename="polymart.xyz.i18n.lang" scope="request"/>
+<title><fmt:message key="HEADER.TOP.HOADONDAMUA"/></title>
 
 <!-- breadcrumb area start -->
 <div class="breadcrumb-area">
@@ -20,7 +22,8 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                             <li class="breadcrumb-item"><a href="<c:url value="/product"/>">shop</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Hoá đơn mua hàng</li>
+                            <li class="breadcrumb-item active" aria-current="page"><fmt:message
+                                    key="HEADER.TOP.HOADONDAMUA"/></li>
                         </ul>
                     </nav>
                 </div>

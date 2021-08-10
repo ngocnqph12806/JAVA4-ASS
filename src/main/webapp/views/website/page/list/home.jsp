@@ -10,6 +10,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <title>Danh sách sản phẩm</title>
+<fmt:setLocale value="${LANG}"/>
+<fmt:setBundle basename="polymart.xyz.i18n.lang" scope="request"/>
 
 <!-- breadcrumb area start -->
 <div class="breadcrumb-area">

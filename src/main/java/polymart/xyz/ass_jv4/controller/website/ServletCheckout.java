@@ -121,8 +121,6 @@ public class ServletCheckout extends HttpServlet {
                         entityProductDetails = _iServiceProductDetails.findById(arrId[i]);
                         if (entityProductDetails != null) {
                             try {
-                                int sl = Integer.parseInt(arrQuantity[i]);
-//                                entityProductDetails.setQuantity(sl);
                                 lstProductDetails.add(entityProductDetails);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -133,12 +131,12 @@ public class ServletCheckout extends HttpServlet {
 
                 // tính tổng tiền hoá đơn
                 Long paymentAmount = Long.parseLong("0");
-//                for (EntityProductDetails x : lstProductDetails) {
-//                    paymentAmount += (x.getPrice() - (x.getPrice() * x.getEntityProduct().getPersenSale() / 100)) * x.getQuantity();
-//                }
                 for (int i = 0; i < lstProductDetails.size(); i++) {
                     paymentAmount += (lstProductDetails.get(i).getPrice() - (lstProductDetails.get(i).getPrice()
                             * lstProductDetails.get(i).getEntityProduct().getPersenSale() / 100)) * Integer.parseInt(arrQuantity[i]);
+                }
+                if (entityPayment.getEntityVoucher() != null) {
+                    paymentAmount -= entityPayment.getEntityVoucher().getPriceSale();
                 }
                 entityPayment.setPaymentAmount(paymentAmount);
 
@@ -172,25 +170,13 @@ public class ServletCheckout extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/checkout");
     }
 
-    private void savePayment(HttpServletRequest request, HttpServletResponse response, EntityVisit entityVisit, EntityPayment entityPayment, List<EntityProductDetails> lstProductDetails, Long paymentAmount, String[] arrQuantity) throws IOException, ServletException {
+    private void savePayment(HttpServletRequest request, HttpServletResponse response, EntityVisit entityVisit, EntityPayment entityPayment,
+                             List<EntityProductDetails> lstProductDetails, Long paymentAmount, String[] arrQuantity) throws IOException, ServletException {
         EntityProductDetails entityProductDetails;
         if (_iServicePayment.newPayment(entityPayment)) {
             entityPayment = _iServicePayment.findIdPayment(entityVisit, paymentAmount + "");
             if (entityPayment != null) {
                 EntityPaymentDetails entityPaymentDetails;
-//                for (EntityProductDetails x : lstProductDetails) {
-//                    int quantity = x.getQuantity();
-//                    entityPaymentDetails = new EntityPaymentDetails();
-//                    entityProductDetails = _iServiceProductDetails.findById(x.getId() + "");
-//                    if (entityProductDetails != null) {
-//                        entityPaymentDetails.setEntityPayment(entityPayment);
-//                        entityPaymentDetails.setEntityProductDetails(entityProductDetails);
-//                        entityPaymentDetails.setQuantity(quantity);
-//                        entityPaymentDetails.setPrice(x.getPrice() * quantity);
-//                        entityPaymentDetails.setPriceSale((x.getPrice() * x.getEntityProduct().getPersenSale() / 100));
-//                        _iServicePaymentDetails.newPaymentDetails(entityPaymentDetails);
-//                    }
-//                }
                 List<EntityPaymentDetails> lst = new ArrayList<>();
                 for (int i = 0; i < lstProductDetails.size(); i++) {
                     entityPaymentDetails = new EntityPaymentDetails();
@@ -207,11 +193,9 @@ public class ServletCheckout extends HttpServlet {
                 CookieUtils.getCookieUtils().setCookieUtils("cart", "", response);
                 String paymentmethod = request.getParameter("payments");
                 if (entityPayment.getEntityVoucher() != null) {
-                    EntityVoucher entityVoucher = _iServiceVoucher.findById(entityPayment.getEntityVoucher().getId());
-                    if (entityVoucher != null) {
-                        entityVoucher.setReQuantity(entityVoucher.getReQuantity() - 1);
-                        boolean flag = _iServiceVoucher.updateVoucher(entityVoucher);
-                        System.out.println(flag);
+                    if (entityPayment.getEntityVoucher() != null) {
+                        entityPayment.getEntityVoucher().setReQuantity(entityPayment.getEntityVoucher().getReQuantity() - 1);
+                        _iServiceVoucher.updateVoucher(entityPayment.getEntityVoucher());
                     }
                 }
                 if (paymentmethod != null) {
@@ -230,11 +214,7 @@ public class ServletCheckout extends HttpServlet {
                         String orderType = "billpayment";
                         String vnp_TxnRef = entityPayment.getId() + "";
                         String vnp_IpAddr = Config.getIpAddress(request);
-
                         String vnp_TmnCode = Config.vnp_TmnCode;
-
-                        String vnp_TransactionNo = vnp_TxnRef;
-                        String vnp_hashSecret = Config.vnp_HashSecret;
 
                         Long amount = entityPayment.getPaymentAmount() * 100;
                         Map<String, String> vnp_Params = new HashMap<>();
@@ -294,20 +274,12 @@ public class ServletCheckout extends HttpServlet {
                         }
                         String queryUrl = query.toString();
                         String vnp_SecureHash = Config.Sha256(Config.vnp_HashSecret + hashData.toString());
-                        //System.out.println("HashData=" + hashData.toString());
                         queryUrl += "&vnp_SecureHashType=SHA256&vnp_SecureHash=" + vnp_SecureHash;
                         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
-//                        com.google.gson.JsonObject job = new JsonObject();
-//                        job.addProperty("code", "00");
-//                        job.addProperty("message", "success");
-//                        job.addProperty("data", paymentUrl);
-//                        Gson gson = new Gson();
                         request.setAttribute("code", "00");
                         request.setAttribute("message", "success");
                         request.setAttribute("data", paymentUrl);
-//                        response.getWriter().write(gson.toJson(job));
                         response.sendRedirect(paymentUrl);
-//                        request.getRequestDispatcher("/views/website/page/cart/vnpay.jsp").forward(request, response);
                         return;
                     }
                 }
